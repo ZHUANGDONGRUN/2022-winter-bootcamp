@@ -22,10 +22,10 @@ assert factorial(9) == 362880
 # [1 + 2 + ... + x] and x is always >= 1.
 
 def print_sum(x: int) -> str:
-    result = 0
+    result2 = 0
     for i in range(1, x + 1):
-        result = result + i
-    return str(result)
+        result2 = result2 + i
+    return str(result2)
 
 
 assert print_sum(1) == "1"
@@ -53,10 +53,8 @@ assert not is_leap_year(2001)
 # Q4. Write a program to convert a list of lowercase words to uppercase words.
 
 def to_upper_case(words: [str]) -> [str]:
-    return [str(words).upper()]
-
-words = ["abc", "de"]
-a = [str(words).upper()]
+    words2 = [ele.upper() if isinstance(ele, str) else ele for ele in words]
+    return words2
 
 
 assert to_upper_case(["abc", "de"]) == ["ABC", "DE"]
@@ -87,8 +85,6 @@ def get_current_time() -> str:
     import datetime
     return datetime.datetime.now().replace(microsecond=0).isoformat() + "Z"
 
-import datetime
-a = datetime.datetime.now().replace(microsecond=0).isoformat()
 
 assert "T" in get_current_time()
 assert "Z" in get_current_time()
@@ -98,14 +94,14 @@ assert 20 == len(get_current_time())
 # Q7. Write a Python program to sum of two given integers. However, if the sum is between 15 to 20 it will return 20
 # please define function and test yourself.
 
-def zdr(a: int, b: int) -> int:
-    if 15 <= a + b < 20:
+def zdr(Q7number1: int, Q7number2: int) -> int:
+    if 15 <= Q7number1 + Q7number2 < 20:
         return 20
     else:
-        return a + b
+        return Q7number1 + Q7number2
 
 
-a = int(input("请输入a："))
-b = int(input("请输入b："))
-result = zdr(a, b)
+Q7number1 = int(input("请输入Q7number1："))
+Q7number2 = int(input("请输入Q7number2："))
+result = zdr(Q7number1, Q7number2)
 print(result)
