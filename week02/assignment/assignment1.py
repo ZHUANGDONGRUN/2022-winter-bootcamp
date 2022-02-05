@@ -94,14 +94,14 @@ assert 20 == len(get_current_time())
 # Q7. Write a Python program to sum of two given integers. However, if the sum is between 15 to 20 it will return 20
 # please define function and test yourself.
 
-def zdr(Q7number1: int, Q7number2: int) -> int:
-    if 15 <= Q7number1 + Q7number2 < 20:
+def zdr(number1: int, number2: int) -> int:
+    if 15 <= number1 + number2 < 20:
         return 20
     else:
-        return Q7number1 + Q7number2
+        return number1 + number2
 
 
-Q7number1 = int(input("请输入Q7number1："))
-Q7number2 = int(input("请输入Q7number2："))
+q7number1 = int(input("请输入q7number1："))
+q7number2 = int(input("请输入q7number2："))
 result = zdr(Q7number1, Q7number2)
 print(result)
