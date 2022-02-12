@@ -3,7 +3,11 @@
 
 # Q1. Given a positive integer N. The task is to write a Python program to check if the number is prime or not.
 def is_prime(n: int) -> bool:
-    return True
+    for i in range(2, abs(n)):
+        if n % i == 0:
+            return False
+    return (abs(n) != 1) & (n != 0)
+
 
 
 # DO NOT ALTER BELOW.
@@ -19,7 +23,9 @@ assert not is_prime(0)
 # Output [3,4,5,6,7,1,2]
 
 def rotate(ar: [int], d: int) -> [int]:
-    return []
+    ar_left = ar[0: d % len(ar)]
+    ar_right = ar[d % len(ar): ]
+    return ar_right + ar_left
 
 
 # DO NOT ALTER BELOW.
@@ -32,6 +38,15 @@ assert rotate([1,2,3], 4) == [2,3,1]
 # Input students would be a list of [student #, score], sort by score ascending order.
 
 def selection_sort(arr: [[int]]) -> [[int]]:
+    for i in range(len(arr) - 1):
+        index_min = i
+        for j in range(i + 1, len(arr)):
+            if arr[j][1] < arr[index_min][1]:
+                index_min = j
+        if i != index_min:
+            temp = arr[index_min]
+            arr[index_min] = arr[i]
+            arr[i] = temp
     return arr
 
 
@@ -43,7 +58,9 @@ assert selection_sort([[1, 100], [2, 70], [3, 95], [4, 66], [5, 98]]) == [[4, 66
 # Q4. Convert a list of Tuples into Dictionary
 # tip: copy operation - copy by value, copy by reference
 
-def convert(tup: (any), di: {any, any}) -> None: 
+def convert(tup: (any), di: {any, any}) -> None:
+    for i in range(0, len(tup), 2):
+        di.setdefault(tup[i], tup[i+1])
     pass
     # Do NOT RETURN di, EDIT IN-PLACE
     
@@ -78,7 +95,30 @@ def create_arr(count: int, dup: int) -> [int]:
         
 # Complete this    
 def bsearch(arr: [int], target: int) -> (int):
-    return (-1, -1)
+    left = 0
+    right = len(arr) -1
+    res = [-1, -1]
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] > target:
+            right = mid -1
+        elif arr[mid] <target:
+            left = mid + 1
+        else:
+            res[0] = mid
+            right = mid - 1
+    left = 0
+    right = len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] > target:
+            right = mid -1
+        elif arr[mid] <target:
+            left = mid + 1
+        else:
+            res[1] = mid
+            left = mid + 1
+    return tuple(res)
 
 assert bsearch_slow(create_arr(10000, 5), 5) == (0, 9999)
 assert bsearch(create_arr(1000, 5), 5) == (0, 999)
@@ -100,10 +140,15 @@ def extract_and_apply(l, p, f):
         if p(x): 
             result.append(f(x)) 
     return result 
-# Rewrite extract_and_apply(l, p, f) in one line using a list comprehension. 
+# Rewrite extract_and_apply(l, p, f) in one line using a list comprehension.
+def extract_and_apply(l, p, f):
+    return [f(x) for x in l if p(x)]
 
 # (2). [5 points] Write a function concatenate(seqs) that returns a list containing the concatenation of the elements of the input sequences. 
-# Your implementation should consist of a single list comprehension, and should not exceed one line. 
+# Your implementation should consist of a single list comprehension, and should not exceed one line.
+def concatenate(seqs):
+    return [elements for item in seqs for elements in item]
+
 >>> concatenate([[1, 2], [3, 4]]) 
 [1, 2, 3, 4] 
 >>> concatenate(["abc", (0, [0])]) 
